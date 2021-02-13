@@ -16,8 +16,14 @@ class Utils:
         print(score)
         joblib.dump(clf, './models/best_model.pkl')
 
-    def get_x_test(self, id_job_offer):
+    def get_x_test(id_job_offer):
         print(id_job_offer)
-        df = self.load_from_csv('./in/to_model.csv')
-        row = df.iloc[df['id_job_offer']==id_job_offer]
-        print(row)
+        df = pd.read_csv('./in/to_api.csv')
+        df_2 = pd.get_dummies(df, drop_first=True , dtype=float) 
+        row = df_2.loc[df['job_offer_id']==int(id_job_offer)]
+        row = row.drop(columns=['job_offer_id'])
+        #print(type(row))
+        X_test = row.to_numpy()
+        #print(X_test)
+        #print(type(X_test))
+        return X_test
