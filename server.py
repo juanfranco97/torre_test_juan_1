@@ -29,6 +29,7 @@ def init():
 @app.route('/predict/<id_job_offer>', methods=['GET'])
 @cross_origin()
 def predict(id_job_offer):
+    Model = joblib.load('./models/best_model.pkl')
     if int(id_job_offer) >= 50000:
         response = make_response(
                 jsonify({'We do not have a job offer with id' : id_job_offer}),
@@ -46,5 +47,4 @@ def predict(id_job_offer):
 
 
 if __name__ == "__main__":
-    Model = joblib.load('./models/best_model.pkl')
     app.run()
