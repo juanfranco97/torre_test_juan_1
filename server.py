@@ -1,6 +1,6 @@
 """This is the main  file that control all aplication internal  flow"""
 #Flask
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response
 from configuration import Configuration
 from flask_cors import CORS, cross_origin
 
@@ -30,12 +30,18 @@ def init():
 @cross_origin()
 def predict(id_job_offer):
     if int(id_job_offer) >= 50000:
-        return f"We do not have a job offer with id {id_job_offer}"
+        response = make_response(
+                jsonify({'We do not have a job offer with id' : id_job_offer}),
+                400,)
     else:
         X_test = Utils.get_x_test(id_job_offer)
         prediction = model.predict(X_test.reshape(1,-1))
         prediction = list(prediction)
-        return jsonify({'prediccion' : prediction[0]})
+        response = make_response(
+                jsonify({'prediccion' : prediction[0]}),
+                200,)
+    return response
+
 
 
 
