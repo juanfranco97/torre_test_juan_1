@@ -29,7 +29,7 @@ def init():
 @app.route('/predict/<id_job_offer>', methods=['GET'])
 @cross_origin()
 def predict(id_job_offer):
-    if id_job_offer >= 50000:
+    if int(id_job_offer) >= 50000:
         return f"We do not have a job offer with id {id_job_offer}"
     else:
         X_test = Utils.get_x_test(id_job_offer)
