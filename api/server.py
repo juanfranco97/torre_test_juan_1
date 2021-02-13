@@ -1,9 +1,14 @@
 """This is the main  file that control all aplication internal  flow"""
 #Flask
 from flask import Flask, jsonify
-from ../configuration import Configuration
+from configuration import Configuration
 from flask_cors import CORS, cross_origin
+
+#test torre
 from utils import Utils
+
+#more
+import joblib
 
 
 
@@ -24,9 +29,13 @@ def init():
 @app.route('/predict/<id_job_offer>', methods=['GET'])
 @cross_origin()
 def predict(id_job_offer):
-    X_test = Utils.get_x_test(id_job_offer)
-    #prediction = model.predict(X_test.reshape(1,-1))
-    return jsonify({'prediccion' : "hola"})
+    if id_job_offer >= 50000:
+        return f"We do not have a job offer with id {id_job_offer}"
+    else:
+        X_test = Utils.get_x_test(id_job_offer)
+        prediction = model.predict(X_test.reshape(1,-1))
+        prediction = list(prediction)
+        return jsonify({'prediccion' : prediction[0]})
 
 
 
