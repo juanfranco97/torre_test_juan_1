@@ -1,27 +1,24 @@
 """This file have the constructor of regression model"""
 
 #Libraries sklearn
-from sklearn.svm import SVR
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import GridSearchCV
 
 #libraries torre test
 from utils import Utils
 
+#libraries numpy
+import numpy as np
+
 class Models:
 
     def __init__(self):
         self.reg = {
-            'SVR' : SVR(),
             'GRADIENT' : GradientBoostingRegressor()
         }
 
         self.params = {
-           'SVR' : {
-               'kernel' : ['linear', 'poly', 'rbf'],
-               'gamma' : ['auto', 'scale'],
-               'C' : [1,5,10]
-           }, 'GRADIENT' : {
+           'GRADIENT' : {
                'loss' : ['ls', 'lad'],
                'learning_rate' : [0.01, 0.05, 0.1]
            }
