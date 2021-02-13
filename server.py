@@ -35,7 +35,7 @@ def predict(id_job_offer):
                 400,)
     else:
         X_test = Utils.get_x_test(id_job_offer)
-        prediction = model.predict(X_test.reshape(1,-1))
+        prediction = Model.predict(X_test.reshape(1,-1))
         prediction = list(prediction)
         response = make_response(
                 jsonify({'prediccion' : prediction[0]}),
@@ -46,5 +46,5 @@ def predict(id_job_offer):
 
 
 if __name__ == "__main__":
-    model = joblib.load('./models/best_model.pkl')
+    Model = joblib.load('./models/best_model.pkl')
     app.run()
