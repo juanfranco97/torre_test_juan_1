@@ -12,4 +12,4 @@
 link: https://torre-test-juan.herokuapp.com/
 
 
-Documentation: https://www.getpostman.com/collections/a1fd7ba7f24473a66c27
+Documentation: https://documenter.getpostman.com/view/9941994/TWDRszr4
